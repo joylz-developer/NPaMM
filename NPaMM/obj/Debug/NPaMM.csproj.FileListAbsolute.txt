@@ -1,0 +1,10 @@
+C:\VSProg\NPaMM\NPaMM\bin\Debug\NPaMM.exe.config
+C:\VSProg\NPaMM\NPaMM\bin\Debug\NPaMM.exe
+C:\VSProg\NPaMM\NPaMM\bin\Debug\NPaMM.pdb
+C:\VSProg\NPaMM\NPaMM\obj\Debug\NPaMM.csprojAssemblyReference.cache
+C:\VSProg\NPaMM\NPaMM\obj\Debug\NPaMM.Form1.resources
+C:\VSProg\NPaMM\NPaMM\obj\Debug\NPaMM.Properties.Resources.resources
+C:\VSProg\NPaMM\NPaMM\obj\Debug\NPaMM.csproj.GenerateResource.cache
+C:\VSProg\NPaMM\NPaMM\obj\Debug\NPaMM.csproj.CoreCompileInputs.cache
+C:\VSProg\NPaMM\NPaMM\obj\Debug\NPaMM.exe
+C:\VSProg\NPaMM\NPaMM\obj\Debug\NPaMM.pdb
