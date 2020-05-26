@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NPaMM {
-  class Model : IDiagramEntity {
+  class Model : DiagramEntity {
     public SizeF radius { get; private set; }
 
     public PointF position { get; set; }
     public SizeF radiusCenter { get; private set; }
     public SizeF collision { get; private set; }
     public PointF? cling { get; set; }
-
-    public IHoverEntity hover { get; set; }
 
     public Model() {
       radius = new SizeF(50, 50);
@@ -24,7 +22,9 @@ namespace NPaMM {
       position = new PointF(100, 100);
       cling = null;
 
-      hover = new HoverEntity();
+      state = new IdleEntity();
+      onEntity = this.RenderEntity;
+      onCenter = this.RenderCenterEntity;
     }
 
     public bool СhangeHover(Point location) {
@@ -35,19 +35,29 @@ namespace NPaMM {
         );
 
       if (distance <= collision.Width) {
-        hover = new HoverEntity();
+        Enter(location);
         return true;
       } else {
-        hover = new UnHoverEntity();
+        Out(location);
         return false;
       }
     }
 
-    public void Render(PaintEventArgs e) {
-      hover.Render(this, e);
+    public void Enter(Point location) {
+      state.Enter(this, location);
     }
 
-    void IDiagramEntity.RenderHover(PaintEventArgs e) {
+    public void Out(Point location) {
+      state.Out(this, location);
+    }
+
+    public void Render(PaintEventArgs e) {
+      onEntity(e);
+      onCenter(e);
+    }
+
+
+    public override void RenderHover(PaintEventArgs e) {
       Graphics g = e.Graphics;
       Pen pen = new Pen(Color.Red);
       RectangleF rect = new RectangleF(
@@ -57,7 +67,7 @@ namespace NPaMM {
       g.DrawEllipse(pen, rect);
     }
 
-    void IDiagramEntity.RenderCenterHover(PaintEventArgs e) {
+    public override void RenderCenterHover(PaintEventArgs e) {
       Graphics g = e.Graphics;
       Pen pen = new Pen(Color.Black);
       RectangleF rect = new RectangleF(
@@ -68,7 +78,7 @@ namespace NPaMM {
       //g.FillRectangle(new SolidBrush(Color.Black), rect);
     }
 
-    void IDiagramEntity.RenderUnHover(PaintEventArgs e) {
+    public override void RenderEntity(PaintEventArgs e) {
       Graphics g = e.Graphics;
       Pen pen = new Pen(Color.Blue);
       RectangleF rect = new RectangleF(
@@ -78,14 +88,14 @@ namespace NPaMM {
       g.DrawEllipse(pen, rect);
     }
 
-    void IDiagramEntity.RenderCenterUnHover(PaintEventArgs e) {
-      Graphics g = e.Graphics;
-      Pen pen = new Pen(Color.Red);
-      RectangleF rect = new RectangleF(
-        this.position - this.radiusCenter,
-        new SizeF(this.radiusCenter.Width * 2, this.radiusCenter.Height * 2));
+    public override void RenderCenterEntity(PaintEventArgs e) {
+      //Graphics g = e.Graphics;
+      //Pen pen = new Pen(Color.Red);
+      //RectangleF rect = new RectangleF(
+      //  this.position - this.radiusCenter,
+      //  new SizeF(this.radiusCenter.Width * 2, this.radiusCenter.Height * 2));
 
-      g.DrawEllipse(pen, rect);
+      //g.DrawEllipse(pen, rect);
       //g.FillRectangle(new SolidBrush(Color.Black), rect);
     }
   }

@@ -33,7 +33,7 @@ namespace NPaMM {
 
     public void DownCursor(MouseEventArgs e) {
       foreach (var m in models) {
-        if (m.hover.hover == IHoverEntity.EHover.ON) {
+        if (m.state.state == IStateEntity.EState.IDLE) {
           movingModel = m;
           m.cling = new PointF(m.position.X - e.Location.X, m.position.Y - e.Location.Y);
         }
@@ -51,7 +51,7 @@ namespace NPaMM {
       foreach (var m in models) {
         if (m.СhangeHover(e.Location)) {
           if (hoverModel != null && hoverModel != m) {
-            hoverModel.hover = new UnHoverEntity();
+            //hoverModel.state = new IdleEntity();
           }
           hoverModel = m;
           break;
