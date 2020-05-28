@@ -20,12 +20,13 @@ namespace NPaMM {
       models = new List<Model>();
       movingModel = null;
       hoverModel = null;
+      selectedModels = new List<Model>();
 
       state = new IdleSpaceState();
     }
 
-    public void AddModel() {
-      var m = new Model();
+    public void AddModel(string name = null) {
+      var m = new Model(name);
       models.Add(m);
     }
 

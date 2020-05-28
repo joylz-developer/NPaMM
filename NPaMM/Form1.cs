@@ -51,5 +51,17 @@ namespace NPaMM {
       _diagram.Render(e);
     }
 
+    private void button1_Click(object sender, EventArgs e) {
+      var name = textBox1.Text;
+
+      if (name == "") {
+        _diagram.AddModel();
+      } else {
+        _diagram.AddModel(name);
+      }
+
+      textBox1.Text = "";
+      pictureBox1.Refresh();
+    }
   }
 }

@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace NPaMM {
   class HoverSpaceState : ISpaceState {
+    public HoverSpaceState() {
+      Console.WriteLine("Set HoverSpaceState");
+    }
+
     public void Click(SpaceDiagram d, MouseEventArgs e) {
 
     }
@@ -26,7 +30,12 @@ namespace NPaMM {
       }
 
       d.hoverModel = null;
-      d.ChangeState(new IdleSpaceState());
+
+      if (d.selectedModels.Count == 0) {
+        d.ChangeState(new IdleSpaceState());
+      } else {
+        d.ChangeState(new SelectedSpaceState());
+      }
     }
 
     public void Up(SpaceDiagram d, MouseEventArgs e) {

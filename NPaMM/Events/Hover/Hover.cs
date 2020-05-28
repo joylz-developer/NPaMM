@@ -20,20 +20,22 @@ namespace NPaMM {
       state = EHover.OUT;
     }
 
-    public event Action OnEnter;
-    public event Action OnOut;
+    public event Pos OnEnter;
+    public event Pos OnOut;
+    public delegate void Pos(DiagramEntity entity, Point location);
 
-    protected bool Enter() {
+
+    protected bool Enter(Point location) {
       if (state == EHover.OUT) {
         state = EHover.ENTER;
-        OnEnter?.Invoke();
+        OnEnter?.Invoke(entity, location);
       }
       return true;
     }
-    protected bool Out() {
+    protected bool Out(Point location) {
       if (state == EHover.ENTER) {
         state = EHover.OUT;
-        OnOut?.Invoke();
+        OnOut?.Invoke(entity, location);
       }
       return false;
     }

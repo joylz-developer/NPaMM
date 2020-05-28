@@ -60,24 +60,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\Select\Select.cs" />
+    <Compile Include="_old\HoverSelectEntity.cs" />
+    <Compile Include="_old\SelectEntity.cs" />
     <Compile Include="Render\CircleRender.cs" />
     <Compile Include="Render\Render.cs" />
     <Compile Include="SpaceDiagram\HoverSpaceState.cs" />
-    <Compile Include="Hover\CircleHover.cs" />
-    <Compile Include="DiagramEntity.cs" />
+    <Compile Include="Events\Hover\CircleHover.cs" />
+    <Compile Include="Entities\DiagramEntity.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hover\Hover.cs" />
+    <Compile Include="Events\Hover\Hover.cs" />
     <Compile Include="SpaceDiagram\IdleSpaceState.cs" />
-    <Compile Include="Model.cs" />
+    <Compile Include="Entities\Model.cs" />
     <Compile Include="SpaceDiagram\MovingSpaceState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Move\Move.cs" />
+    <Compile Include="Events\Move\Move.cs" />
     <Compile Include="SpaceDiagram\ISpaceState.cs" />
     <Compile Include="SpaceDiagram\SelectedSpaceState.cs" />
     <Compile Include="_old\IStateEntity.cs" />
@@ -109,5 +112,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

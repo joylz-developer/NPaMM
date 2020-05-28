@@ -4,18 +4,16 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace NPaMM {
-  class IdleEntity : IStateEntity {
-    public IStateEntity.EState state => IStateEntity.EState.IDLE;
+namespace NPaMM.Entities {
+  class SelectEntity : IStateEntity {
+    public IStateEntity.EState state => IStateEntity.EState.SELECTED;
 
     public void Click(DiagramEntity d, Point location) {
 
     }
 
     public void Enter(DiagramEntity d, Point location) {
-      
     }
 
     public void Out(DiagramEntity d, Point location) {

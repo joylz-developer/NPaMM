@@ -18,5 +18,7 @@ namespace NPaMM {
 
     void Enter(DiagramEntity d, Point location);
     void Out(DiagramEntity d, Point location);
+    void Click(DiagramEntity d, Point location);
+
   }
 }

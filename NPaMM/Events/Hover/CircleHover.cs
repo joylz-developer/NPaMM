@@ -16,10 +16,10 @@ namespace NPaMM {
           Math.Pow(location.Y - entity.position.Y, 2)
         );
 
-      if (distance <= entity.collision.Width) {
-        return Enter();
+      if (distance <= entity.render.collision.Width) {
+        return Enter(location);
       } else {
-        return Out();
+        return Out(location);
       }
     }
   }

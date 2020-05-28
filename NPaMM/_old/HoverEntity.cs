@@ -10,13 +10,15 @@ namespace NPaMM {
   class HoverEntity : IStateEntity {
     public IStateEntity.EState state => IStateEntity.EState.HOVER;
 
+    public void Click(DiagramEntity d, Point location) {
+
+    }
+
     public void Enter(DiagramEntity d, Point location) {
     }
 
     public void Out(DiagramEntity d, Point location) {
-      //d.ChangeState(new IdleEntity());
-      //d.onEntity = d.RenderEntity;
-      //d.onCenter = d.RenderCenterEntity;
+
     }
   }
 }
