@@ -5,50 +5,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NPaMM.Select;
 
 namespace NPaMM {
   class Model : DiagramEntity {
     public SizeF radius { get; private set; }
+    static readonly Random _r = new Random();
 
-    public PointF position { get; set; }
     public SizeF radiusCenter { get; private set; }
-    public SizeF collision { get; private set; }
     public PointF? cling { get; set; }
 
-    public Model() {
+    public CircleHover hover { get; private set; }
+    public Move move { get; private set; }
+
+    public Model() : base(new SizeF(50, 50)) {
       radius = new SizeF(50, 50);
-      collision = radius + new SizeF(0, 0);
       radiusCenter = new SizeF(3, 3);
-      position = new PointF(100, 100);
+      position = new PointF(100, _r.Next(70, 140));
       cling = null;
 
-      state = new IdleEntity();
-      onEntity = this.RenderEntity;
-      onCenter = this.RenderCenterEntity;
+      hover = new CircleHover(this);
+      hover.OnEnter += this.EnterHover;
+      hover.OnOut += this.OutHover;
+
+      OutHover();
+
+      move = new Move(this);
     }
 
     public bool СhangeHover(Point location) {
-      var distance = 
-        Math.Sqrt(
-          Math.Pow(location.X - this.position.X, 2) + 
-          Math.Pow(location.Y - this.position.Y, 2)
-        );
+      return hover.Check(location);
+    }
 
-      if (distance <= collision.Width) {
-        Enter(location);
+    public bool Down(Point location) {
+      if (hover.state == Hover.EHover.ENTER) {
+        move.Start(location);
         return true;
-      } else {
-        Out(location);
-        return false;
       }
-    }
-
-    public void Enter(Point location) {
-      state.Enter(this, location);
-    }
-
-    public void Out(Point location) {
-      state.Out(this, location);
+      return false;
     }
 
     public void Render(PaintEventArgs e) {
@@ -56,6 +50,15 @@ namespace NPaMM {
       onCenter(e);
     }
 
+    public void EnterHover() {
+      onEntity = this.RenderHover;
+      onCenter = this.RenderCenterHover;
+    }
+
+    public void OutHover() {
+      onEntity = this.RenderEntity;
+      onCenter = this.RenderCenterEntity;
+    }
 
     public override void RenderHover(PaintEventArgs e) {
       Graphics g = e.Graphics;

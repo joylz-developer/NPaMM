@@ -19,10 +19,17 @@ namespace NPaMM {
       pictureBox1.MouseMove += this.PictureBox1_MouseMove;
       pictureBox1.MouseDown += this.PictureBox1_MouseDown;
       pictureBox1.MouseUp += this.PictureBox1_MouseUp;
+      pictureBox1.MouseClick += this.PictureBox1_MouseClick;
+      ;
 
       _diagram = new SpaceDiagram();
       _diagram.AddModel();
       _diagram.AddModel();
+    }
+
+    private void PictureBox1_MouseClick(object sender, MouseEventArgs e) {
+      _diagram.ClickCursor(e);
+      pictureBox1.Refresh();
     }
 
     private void PictureBox1_MouseUp(object sender, MouseEventArgs e) {

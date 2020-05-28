@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NPaMM {
-  class IdleEntity : IStateEntity {
-    public IStateEntity.EState state => IStateEntity.EState.IDLE;
+  class HoverEntity : IStateEntity {
+    public IStateEntity.EState state => IStateEntity.EState.HOVER;
 
     public void Enter(DiagramEntity d, Point location) {
-      d.ChangeState(new HoverEntity());
-      d.onEntity = d.RenderHover;
-      d.onCenter = d.RenderCenterHover;
     }
 
     public void Out(DiagramEntity d, Point location) {
-
+      //d.ChangeState(new IdleEntity());
+      //d.onEntity = d.RenderEntity;
+      //d.onCenter = d.RenderCenterEntity;
     }
   }
 }

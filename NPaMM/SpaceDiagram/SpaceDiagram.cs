@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace NPaMM {
+  class SpaceDiagram {
+    public List<Model> models { get; private set; }
+
+    public ISpaceState state { get; private set; }
+
+    public Model movingModel { get; set; }
+    public Model hoverModel { get; set; }
+    public List<Model> selectedModels { get; set; }
+
+    public SpaceDiagram() {
+      models = new List<Model>();
+      movingModel = null;
+      hoverModel = null;
+
+      state = new IdleSpaceState();
+    }
+
+    public void AddModel() {
+      var m = new Model();
+      models.Add(m);
+    }
+
+    public void Render(PaintEventArgs e) {
+      foreach (var m in models) {
+        m.Render(e);
+      }
+    }
+
+    public void ChangeState(ISpaceState state) {
+      this.state = state;
+    }
+
+    public void ClickCursor(MouseEventArgs e) {
+      state.Click(this, e);
+    }
+
+    public void MoveCursor(MouseEventArgs e) {
+      state.Move(this, e);
+    }
+
+    public void DownCursor(MouseEventArgs e) {
+      state.Down(this, e);
+    }
+
+    public void UpCursor(MouseEventArgs e) {
+      state.Up(this, e);
+    }
+
+  }
+}
