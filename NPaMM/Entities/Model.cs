@@ -14,11 +14,14 @@ namespace NPaMM {
     public int id { get; private set; }
     public string name { get; private set; }
 
+    public List<Bind> bind { get; private set; }
+
     //public CircleRender render { get; set; }
     public CircleHover hover { get; private set; }
     public Move move { get; private set; }
     public Select select { get; private set; }
     public override Render render { get; set; }
+    private CircleRender renderThis { get; set; }
 
     public Model(string name = null) {
       id = _id;
@@ -26,11 +29,14 @@ namespace NPaMM {
       position = new PointF(100, _r.Next(30, 300));
       this.name = name ?? id.ToString();
 
+      bind = new List<Bind>();
+
       InitComp();
     }
 
     private void InitComp() {
       render = new CircleRender(this, name);
+      renderThis = (CircleRender)render;
 
       hover = new CircleHover(this);
       move = new Move(this);
@@ -38,34 +44,58 @@ namespace NPaMM {
 
       hover.OnEnter += (DiagramEntity d, Point location) => {
         if (select.select == Select.ESelect.ENABLE) {
-          ((CircleRender)render).SetEntity(Color.Magenta).SetEntity(3);
+          renderThis.SetEntity(Color.Magenta).SetEntity(3);
         } else {
-          ((CircleRender)render).SetEntity(Color.Black).SetEntity(3);
+          renderThis.SetEntity(Color.Black).SetEntity(3);
         }
       };
       hover.OnOut += (DiagramEntity d, Point location) => {
         if (select.select == Select.ESelect.ENABLE) {
-          ((CircleRender)render).SetEntity(Color.Magenta).SetEntity(2);
+          renderThis.SetEntity(Color.Magenta).SetEntity(2);
         } else {
-          ((CircleRender)render).SetEntity(Color.Black).SetEntity(2);
+          renderThis.SetEntity(Color.Black).SetEntity(2);
         }
       };
 
       move.OnStart += (DiagramEntity entity, Point location) => {
-        ((CircleRender)render).SetEntity(Color.LightGray).SetEntity(2);
+        renderThis.SetEntity(Color.LightGray).SetEntity(2);
       };
       move.OnStop += (DiagramEntity entity, Point location) => {
-        ((CircleRender)render).SetEntity(Color.Black).SetEntity(3);
+        renderThis.SetEntity(Color.Black).SetEntity(3);
       };
 
       select.OnDisable += (DiagramEntity entity) => {
-        ((CircleRender)render).SetEntity(Color.Black).SetEntity(3);
+        renderThis.SetEntity(Color.Black).SetEntity(3);
       };
       select.OnEnable += (DiagramEntity entity) => {
-        ((CircleRender)render).SetEntity(Color.Magenta).SetEntity(2);
+        renderThis.SetEntity(Color.Magenta).SetEntity(2);
       };
 
-      ((CircleRender)render).SetEntity(Color.Black).SetEntity(2);
+      renderThis.SetEntity(Color.Black).SetEntity(2);
+    }
+
+    public void AddBind(Model m, int time) {
+      RemoveDoubleBind(m);
+      bind.Add(new Bind(this, m, time));
+    }
+
+    public void RemoveBind(Model m) {
+      RemoveDoubleBind(m);
+    }
+
+    private void RemoveDoubleBind(Model m) {
+      foreach (var item in bind) {
+        if (item.right.id == m.id) {
+          bind.Remove(item);
+          return;
+        }
+      }
+      foreach (var item in m.bind) {
+        if (item.right.id == this.id) {
+          m.bind.Remove(item);
+          return;
+        }
+      }
     }
 
     public bool СhangeHover(Point location) {
@@ -83,6 +113,10 @@ namespace NPaMM {
 
     public void Render(PaintEventArgs e) {
       render.Draw(e);
+
+      foreach (var item in bind) {
+        item.Render(e);
+      }
     }
   }
 }

@@ -19,6 +19,10 @@ namespace NPaMM {
       collision = radius + new SizeF(5, 5);
     }
 
+    public override SizeF GetSize() {
+      return radius;
+    }
+
     public override void Draw(PaintEventArgs e) {
       onEntity(e);
       onCenter(e);
@@ -29,7 +33,7 @@ namespace NPaMM {
       Graphics g = e.Graphics;
       Pen pen = new Pen(col, width);
       RectangleF rect = new RectangleF(
-        obj.position - radius,
+        obj.position - radius + shift,
         new SizeF(radius.Width * 2, radius.Height * 2)
       );
       g.DrawEllipse(pen, rect);
@@ -56,5 +60,7 @@ namespace NPaMM {
       this.width = width;
       return this;
     }
+
+
   }
 }

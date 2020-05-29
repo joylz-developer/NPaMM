@@ -23,8 +23,28 @@ namespace NPaMM {
       ;
 
       _diagram = new SpaceDiagram();
-      _diagram.AddModel();
-      _diagram.AddModel();
+      _diagram.OnChangedSelectedModels += CheckDiagramSelectedModels;
+
+      CheckDiagramSelectedModels();
+      _diagram.AddModel("Start");
+      _diagram.AddModel("End");
+    }
+
+    private void CheckDiagramSelectedModels() {
+      var c = _diagram.selectedModels.Count();
+
+      if (c == 2) {
+        SetEnableAddingBind();
+      } else {
+        SetEnableAddingBind(false);
+      }
+    }
+
+    private void SetEnableAddingBind(bool isEnabled = true) {
+      //textBox2.Enabled = isEnabled;
+      //button2.Enabled = isEnabled;
+      //button3.Enabled = isEnabled;
+      groupBox2.Enabled = isEnabled;
     }
 
     private void PictureBox1_MouseClick(object sender, MouseEventArgs e) {
@@ -62,6 +82,34 @@ namespace NPaMM {
 
       textBox1.Text = "";
       pictureBox1.Refresh();
+    }
+
+    private void button2_Click(object sender, EventArgs e) {
+      var c = _diagram.selectedModels.Count();
+      var time = textBox2.Text;
+
+      if (c == 2 && int.TryParse(time, out int timeInt)) {
+        _diagram.selectedModels[0].AddBind(_diagram.selectedModels[1], timeInt);
+        _diagram.ResetSelectedModels();
+        textBox2.Text = "";
+        pictureBox1.Refresh();
+        CheckDiagramSelectedModels();
+      } else {
+        MessageBox.Show("Error input");
+      }
+    }
+
+    private void button3_Click(object sender, EventArgs e) {
+      var c = _diagram.selectedModels.Count();
+
+      if (c == 2) {
+        _diagram.selectedModels[0].RemoveBind(_diagram.selectedModels[1]);
+        _diagram.ResetSelectedModels();
+        pictureBox1.Refresh();
+        CheckDiagramSelectedModels();
+      } else {
+        MessageBox.Show("Error selected not 2");
+      }
     }
   }
 }

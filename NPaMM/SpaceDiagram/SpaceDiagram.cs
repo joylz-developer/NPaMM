@@ -16,6 +16,8 @@ namespace NPaMM {
     public Model hoverModel { get; set; }
     public List<Model> selectedModels { get; set; }
 
+    public event Action OnChangedSelectedModels;
+
     public SpaceDiagram() {
       models = new List<Model>();
       movingModel = null;
@@ -30,6 +32,13 @@ namespace NPaMM {
       models.Add(m);
     }
 
+    public void ResetSelectedModels() {
+      foreach (var item in selectedModels) {
+        item.select.Switch();
+      }
+      selectedModels.Clear();
+    }
+
     public void Render(PaintEventArgs e) {
       foreach (var m in models) {
         m.Render(e);
@@ -38,6 +47,10 @@ namespace NPaMM {
 
     public void ChangeState(ISpaceState state) {
       this.state = state;
+    }
+
+    public void ChangedSelectedModels() {
+      OnChangedSelectedModels?.Invoke();
     }
 
     public void ClickCursor(MouseEventArgs e) {

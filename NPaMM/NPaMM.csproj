@@ -60,7 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Bind.cs" />
     <Compile Include="Events\Select\Select.cs" />
+    <Compile Include="Render\ArrowRender.cs" />
     <Compile Include="_old\HoverSelectEntity.cs" />
     <Compile Include="_old\SelectEntity.cs" />
     <Compile Include="Render\CircleRender.cs" />

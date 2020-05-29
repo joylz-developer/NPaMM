@@ -22,14 +22,21 @@ namespace NPaMM {
 
     public string text { get; protected set; }
 
+    public SizeF shift { get; set; }
+    public float angle { get; set; }
+
     public Render(DiagramEntity obj, string text) {
       this.obj = obj;
       this.text = text;
       collision = new SizeF();
+      shift = new SizeF(0, 0);
+      angle = 0;
       onCenter = RenderCenter;
       onEntity = RenderEntity;
       onText = RenderText;
     }
+
+    public abstract SizeF GetSize();
 
     public abstract void Draw(PaintEventArgs e);
 

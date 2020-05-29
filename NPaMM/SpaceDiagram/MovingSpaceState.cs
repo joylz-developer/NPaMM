@@ -26,6 +26,8 @@ namespace NPaMM {
           d.selectedModels[0].select.Switch();
           d.selectedModels.RemoveAt(0);
         }
+
+        d.ChangedSelectedModels();
         d.ChangeState(new HoverSpaceState());
       }
     }
