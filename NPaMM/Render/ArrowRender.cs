@@ -14,8 +14,8 @@ namespace NPaMM {
     public SizeF endShift { get; set; }
     protected Color col = Color.Black;
     protected float width = 2;
-    protected float sizeArrow = 30;
-    protected float sizeArrowWidth = 20;
+    protected float sizeArrow = 15;
+    protected float sizeArrowWidth = 5;
 
     public ArrowRender(DiagramEntity obj, string text) : base(obj, text) {
       length = new SizeF(30, 0);
@@ -50,13 +50,17 @@ namespace NPaMM {
       var endP = end + endShift;
       g.DrawLine(pen, startP, endP);
 
+      var sin = (float)Math.Sin(angle);
+      var cos = (float)Math.Cos(angle);
+      //Console.WriteLine(cos);
+
       SolidBrush brush = new SolidBrush(Color.Black);
-      var p2 = new PointF(endP.X + sizeArrow, endP.Y + sizeArrowWidth);
-      p2.X = (float)(endP.X + (p2.X - endP.X) * Math.Cos(angle) - (p2.Y - endP.Y) * Math.Sin(angle));
-      p2.Y = (float)(endP.Y + (p2.Y - endP.Y) * Math.Cos(angle) + (p2.X - endP.X) * Math.Sin(angle));
-      var p3 = new PointF(endP.X + sizeArrow, endP.Y - sizeArrowWidth);
-      p3.X = (float)(endP.X + (p3.X - endP.X) * Math.Cos(angle) - (p3.Y - endP.Y) * Math.Sin(angle));
-      p3.Y = (float)(endP.Y + (p3.Y - endP.Y) * Math.Cos(angle) + (p3.X - endP.X) * Math.Sin(angle));
+      var p2 = new PointF(endP.X, endP.Y);
+      p2.X += sizeArrow * cos - sizeArrowWidth * sin;
+      p2.Y += sizeArrowWidth * cos + sizeArrow * sin;
+      var p3 = new PointF(endP.X, endP.Y);
+      p3.X += sizeArrow * cos - -sizeArrowWidth * sin;
+      p3.Y += -sizeArrowWidth * cos + sizeArrow * sin;
       PointF[] points = new PointF[] {
         new PointF(endP.X, endP.Y), p2, p3
       };
@@ -69,13 +73,24 @@ namespace NPaMM {
 
     protected new void RenderText(PaintEventArgs e) {
       Graphics g = e.Graphics;
-      Font drawFont = new Font("Arial", 10);
+
+      var pos = GetCenterPosition();
+
+      g.FillRectangle(
+        new SolidBrush(Color.White),
+        pos.X - 10 * text.Length / 2 - ((10 * text.Length) / 100 * 8),
+        pos.Y - 10,
+        10 * text.Length, 
+        10 * 2);
+
+      Font drawFont = new Font("Arial", 10, FontStyle.Bold);
       SolidBrush drawBrush = new SolidBrush(Color.Black);
       StringFormat drawFormat = new StringFormat {
         Alignment = StringAlignment.Center,
         LineAlignment = StringAlignment.Center
       };
-      g.DrawString(text, drawFont, drawBrush, GetCenterPosition(), drawFormat);
+
+      g.DrawString(text, drawFont, drawBrush, pos, drawFormat);
 
       drawFont.Dispose();
       drawBrush.Dispose();
