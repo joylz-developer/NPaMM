@@ -8,26 +8,26 @@ using System.Windows.Forms;
 
 namespace NPaMM {
   class Bind : DiagramEntity {
-    public int time { get; private set; }
+    public int timeMin { get; private set; }
+    public int timeMax { get; private set; }
 
     public Model left { get; private set; }
     public Model right { get; private set; }
 
     public override Render render { get; set; }
 
-    public Bind(Model left, Model right, int time = 0) {
-      this.time = time;
+    public Bind(Model left, Model right, int timeMin = 0, int timeMax = -1) {
+      this.timeMin = timeMin;
+      this.timeMax = timeMax == -1 ? timeMin : timeMax;
       this.left = left;
       this.right = right;
 
-      render = new ArrowRender(this, time.ToString());
+      render = new ArrowRender(this, (this.timeMin + "-" + this.timeMax).ToString());
       var dist = CalculateDistance();
       ((ArrowRender)render).length = new SizeF((float)dist, (float)dist);
     }
 
     private double CalculateDistance() {
-      var sizeL = left.render.GetSize();
-      var sizeR = right.render.GetSize();
       var posL = left.position;
       var posR = right.position;
       var distance =
@@ -35,8 +35,6 @@ namespace NPaMM {
           Math.Pow(posL.X - posR.X, 2) +
           Math.Pow(posL.Y - posR.Y, 2)
         );
-
-      //distance -= sizeL.Width - sizeR.Width;
 
       return distance;
     }

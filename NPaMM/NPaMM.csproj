@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\NetworkCore.cs" />
     <Compile Include="Entities\Bind.cs" />
     <Compile Include="Events\Select\Select.cs" />
     <Compile Include="Render\ArrowRender.cs" />

@@ -54,7 +54,7 @@ namespace NPaMM {
 
     protected void RenderText(PaintEventArgs e) {
       Graphics g = e.Graphics;
-      Font drawFont = new Font("Arial", 12);
+      Font drawFont = new Font("Arial", 10);
       SolidBrush drawBrush = new SolidBrush(Color.Black);
       StringFormat drawFormat = new StringFormat {
         Alignment = StringAlignment.Center,

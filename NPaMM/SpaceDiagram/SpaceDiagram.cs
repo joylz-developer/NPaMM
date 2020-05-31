@@ -32,6 +32,12 @@ namespace NPaMM {
       models.Add(m);
     }
 
+    public void SortModels() {
+      models.Sort((m1, m2) => {
+        return m1.number < m2.number ? m2.number : m1.number;
+      });
+    }
+
     public void ResetSelectedModels() {
       foreach (var item in selectedModels) {
         item.select.Switch();
