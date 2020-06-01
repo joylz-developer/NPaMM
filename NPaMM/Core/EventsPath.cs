@@ -28,6 +28,12 @@ namespace NPaMM.Core {
       dispersionPath += bind.dispersion;
     }
 
+    public void AddPath(EventsPath path) {
+      this.path.AddRange(path.path);
+      duration += path.duration;
+      dispersionPath += path.dispersionPath;
+    }
+
     public float SqrDispersionPath() {
       return (float)Math.Sqrt(dispersionPath);
     }
