@@ -11,7 +11,7 @@ namespace NPaMM {
     private Model _save = null;
 
     public SelectedSpaceState() {
-      Console.WriteLine("Set SelectedSpaceState");
+      //Console.WriteLine("Set SelectedSpaceState");
     }
 
     public void Click(SpaceDiagram d, MouseEventArgs e) {

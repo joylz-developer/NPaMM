@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace NPaMM {
   class HoverSpaceState : ISpaceState {
     public HoverSpaceState() {
-      Console.WriteLine("Set HoverSpaceState");
+      //Console.WriteLine("Set HoverSpaceState");
     }
 
     public void Click(SpaceDiagram d, MouseEventArgs e) {

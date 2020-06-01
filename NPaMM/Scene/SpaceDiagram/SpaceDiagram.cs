@@ -27,14 +27,43 @@ namespace NPaMM {
       state = new IdleSpaceState();
     }
 
+    public void AddImportModels(List<ImportModels> imports) {
+      foreach (var import in imports) {
+        if (import.work.Length != 2) {
+          continue;
+        }
+
+        // create missing models
+        var indexes = new int[2];
+
+        for (int i = 0; i < 2; i++) {
+          indexes[i] = models.FindIndex((m) => m.number == import.work[i]);
+
+          if (indexes[i] == -1) {
+            AddModel(import.work[i].ToString(), import.work[i]);
+            indexes[i] = models.Count() - 1;
+          }
+        }
+
+        models[indexes[0]].AddBind(
+          models[indexes[1]], import.timeMin, import.timeMax
+        );
+      }
+    }
+
     public void AddModel(string name = null) {
       var m = new Model(name);
       models.Add(m);
     }
 
+    public void AddModel(string name, int number) {
+      var m = new Model(name, number.ToString());
+      models.Add(m);
+    }
+
     public void SortModels() {
       models.Sort((m1, m2) => {
-        return m1.number < m2.number ? m2.number : m1.number;
+        return m1.number < m2.number ? -1 : 1;
       });
     }
 

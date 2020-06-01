@@ -8,21 +8,29 @@ using System.Windows.Forms;
 
 namespace NPaMM {
   class Bind : DiagramEntity {
-    public int timeMin { get; private set; }
-    public int timeMax { get; private set; }
+    public float timeMin { get; private set; }
+    public float timeMax { get; private set; }
+    public float timeExpected { get; private set; }
+    public float dispersion { get; private set; }
 
     public Model left { get; private set; }
     public Model right { get; private set; }
 
+    public string displayText { get; private set; }
+
     public override Render render { get; set; }
 
-    public Bind(Model left, Model right, int timeMin = 0, int timeMax = -1) {
+    public Bind(Model left, Model right, float timeMin = 0, float timeMax = -1) {
       this.timeMin = timeMin;
       this.timeMax = timeMax == -1 ? timeMin : timeMax;
       this.left = left;
       this.right = right;
+      this.timeExpected = TimeExpectedCalc();
+      this.dispersion = DispersionCalc();
 
-      render = new ArrowRender(this, (this.timeMin + "-" + this.timeMax).ToString());
+      DisplayText();
+
+      render = new ArrowRender(this, displayText);
       var dist = CalculateDistance();
       ((ArrowRender)render).length = new SizeF((float)dist, (float)dist);
     }
@@ -37,6 +45,22 @@ namespace NPaMM {
         );
 
       return distance;
+    }
+
+    public string DisplayText() {
+      var times = (this.timeMin + "-" + this.timeMax).ToString();
+      var expected  = (this.timeExpected).ToString();
+
+      displayText = expected;
+      return displayText;
+    }
+
+    public float TimeExpectedCalc() {
+      return (3 * timeMin + 2 * timeMax) / 5;
+    }
+
+    public float DispersionCalc() {
+      return (float)Math.Pow((timeMax - timeMin), 2) / 25;
     }
 
     public void Render(PaintEventArgs e) {

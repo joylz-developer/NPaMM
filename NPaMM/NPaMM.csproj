@@ -60,36 +60,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\EventsPath.cs" />
     <Compile Include="Core\NetworkCore.cs" />
-    <Compile Include="Entities\Bind.cs" />
-    <Compile Include="Events\Select\Select.cs" />
-    <Compile Include="Render\ArrowRender.cs" />
-    <Compile Include="_old\HoverSelectEntity.cs" />
-    <Compile Include="_old\SelectEntity.cs" />
-    <Compile Include="Render\CircleRender.cs" />
-    <Compile Include="Render\Render.cs" />
-    <Compile Include="SpaceDiagram\HoverSpaceState.cs" />
-    <Compile Include="Events\Hover\CircleHover.cs" />
-    <Compile Include="Entities\DiagramEntity.cs" />
+    <Compile Include="Scene\Entities\Bind.cs" />
+    <Compile Include="Scene\Events\Select\Select.cs" />
+    <Compile Include="Scene\Render\ArrowRender.cs" />
+    <Compile Include="Scene\SpaceDiagram\ImportModels.cs" />
+    <Compile Include="Utils\ListViewCore.cs" />
+    <Compile Include="Scene\Render\CircleRender.cs" />
+    <Compile Include="Scene\Render\Render.cs" />
+    <Compile Include="Scene\SpaceDiagram\HoverSpaceState.cs" />
+    <Compile Include="Scene\Events\Hover\CircleHover.cs" />
+    <Compile Include="Scene\Entities\DiagramEntity.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Events\Hover\Hover.cs" />
-    <Compile Include="SpaceDiagram\IdleSpaceState.cs" />
-    <Compile Include="Entities\Model.cs" />
-    <Compile Include="SpaceDiagram\MovingSpaceState.cs" />
+    <Compile Include="Scene\Events\Hover\Hover.cs" />
+    <Compile Include="Scene\SpaceDiagram\IdleSpaceState.cs" />
+    <Compile Include="Scene\Entities\Model.cs" />
+    <Compile Include="Scene\SpaceDiagram\MovingSpaceState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Events\Move\Move.cs" />
-    <Compile Include="SpaceDiagram\ISpaceState.cs" />
-    <Compile Include="SpaceDiagram\SelectedSpaceState.cs" />
-    <Compile Include="_old\IStateEntity.cs" />
-    <Compile Include="_old\HoverEntity.cs" />
-    <Compile Include="SpaceDiagram\SpaceDiagram.cs" />
-    <Compile Include="_old\IdleEntity.cs" />
+    <Compile Include="Scene\Events\Move\Move.cs" />
+    <Compile Include="Scene\SpaceDiagram\ISpaceState.cs" />
+    <Compile Include="Scene\SpaceDiagram\SelectedSpaceState.cs" />
+    <Compile Include="Scene\SpaceDiagram\SpaceDiagram.cs" />
+    <Compile Include="Utils\SND.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

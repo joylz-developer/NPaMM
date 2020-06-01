@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace NPaMM {
   class IdleSpaceState : ISpaceState {
     public IdleSpaceState() {
-      Console.WriteLine("Set IdleSpaceState");
+      //Console.WriteLine("Set IdleSpaceState");
     }
 
     public void Click(SpaceDiagram d, MouseEventArgs e) {

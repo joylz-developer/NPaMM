@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace NPaMM {
   class Model : DiagramEntity {
     static readonly Random _r = new Random();
-    static int _id = 0;
+    static int _id = 1;
 
     public int id { get; private set; }
 
@@ -90,7 +90,7 @@ namespace NPaMM {
       renderThis.SetEntity(Color.Black).SetEntity(2);
     }
 
-    public void AddBind(Model m, int timeMin, int timeMax) {
+    public void AddBind(Model m, float timeMin, float timeMax) {
       RemoveDoubleBind(m);
       var newBind = new Bind(this, m, timeMin, timeMax);
       binds.Add(newBind);

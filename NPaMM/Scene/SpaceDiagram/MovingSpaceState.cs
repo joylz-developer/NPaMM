@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace NPaMM {
   class MovingSpaceState : ISpaceState {
     public MovingSpaceState() {
-      Console.WriteLine("Set MovingSpaceState");
+      //Console.WriteLine("Set MovingSpaceState");
     }
     private bool _isMoved = false;
 
