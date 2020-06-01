@@ -41,16 +41,15 @@ namespace NPaMM.Utils {
     };
 
 
-    public static float Get(float num) {
+    public static float GetChance(float z) {
       var chance = 0.5f;
 
-      if (num < 0) {
+      if (z < 0) {
         chance *= -1;
       }
 
-      var n = Math.Abs(num);
-
-      var numRound = Math.Round(n, 1);
+      var n = Math.Abs(z);
+      var numRound = (float)Math.Round(n, 1);
 
       if (n < table.First()[0]) {
         chance *= 0.0f;
@@ -58,11 +57,29 @@ namespace NPaMM.Utils {
       } else if (n > table.Last()[0]) {
         chance *= 1.0f;
       } else {
-        var lineTable = table.Find((el) => el.First() == n);
+        var lineTable = table.Find((el) => el.First() == numRound);
         chance *= lineTable[1];
       }
 
       return 0.5f + chance;
+    }
+
+    public static float? GetZ(float chance) {
+      if (chance < 0 || chance > 100) {
+        return null;
+      }
+
+      var c = chance / 100;
+
+      foreach (var item in table) {
+        var round = (float)Math.Round(item[1], 2);
+
+        if (c <= round) {
+          return item[0];
+        }
+      }
+
+      return null;
     }
 
     //var num1 = 1 / Math.Sqrt(2 * Math.PI);

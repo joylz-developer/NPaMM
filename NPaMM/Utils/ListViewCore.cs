@@ -97,6 +97,31 @@ namespace NPaMM {
       _listView.Items.Add(v);
     }
 
+    public void AddLine(string s, ListViewItem style = null) {
+      var v = style ?? new ListViewItem();
+
+      if (_isFirstColumn) {
+        v.Text = (_lastId++).ToString();
+      } else {
+        v.Text = s;
+      }
+
+      for (int i = 0; i < _columnHeaders.Count(); i++) {
+        if (i == 0 && _isFirstColumn == false) {
+          continue;
+        }
+
+        if (1 <= i) {
+          v.SubItems.Add("");
+        } else {
+          v.SubItems.Add(s);
+        }
+      }
+
+      _listViewItem.Add(v);
+      _listView.Items.Add(v);
+    }
+
     public void AddLines(List<List<string>> lines) {
       lines.ForEach(line => this.AddLine(line));
     }

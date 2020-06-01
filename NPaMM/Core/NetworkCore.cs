@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NPaMM.Utils;
 
 namespace NPaMM.Core {
   class NetworkCore {
@@ -182,6 +183,35 @@ namespace NPaMM.Core {
       });
 
       return maxDurationPath;
+    }
+
+    public float? EstimateProbability(float term) {
+      var dispersion = maxDurationPath?.First().SqrDispersionPath();
+
+      if (dispersion == null) {
+        return null;
+      }
+
+      var z = (term - maxDurationPath.First().duration) / dispersion;
+      return SND.GetChance((float)z);
+    }
+
+    public float? EstimateMaxPossibleTime(float chance) {
+      var duration = maxDurationPath?.First().duration;
+
+      if (duration == null) {
+        return null;
+      }
+
+      var z = SND.GetZ(chance);
+
+      if (z == null) {
+        return null;
+      }
+
+      return 
+        maxDurationPath.First().duration + 
+        z * maxDurationPath.First().SqrDispersionPath();
     }
   }
 }

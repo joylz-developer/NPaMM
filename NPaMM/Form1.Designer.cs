@@ -51,6 +51,11 @@
       this.label6 = new System.Windows.Forms.Label();
       this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.listView1 = new System.Windows.Forms.ListView();
+      this.groupBox6 = new System.Windows.Forms.GroupBox();
+      this.button6 = new System.Windows.Forms.Button();
+      this.textBox6 = new System.Windows.Forms.TextBox();
+      this.label7 = new System.Windows.Forms.Label();
+      this.label8 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       this.tabControl1.SuspendLayout();
       this.tabPage1.SuspendLayout();
@@ -64,6 +69,7 @@
       this.groupBox5.SuspendLayout();
       this.groupBox4.SuspendLayout();
       this.groupBox3.SuspendLayout();
+      this.groupBox6.SuspendLayout();
       this.SuspendLayout();
       // 
       // pictureBox1
@@ -83,7 +89,7 @@
       this.tabControl1.Location = new System.Drawing.Point(0, 0);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(813, 557);
+      this.tabControl1.Size = new System.Drawing.Size(813, 564);
       this.tabControl1.TabIndex = 1;
       this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
       // 
@@ -263,13 +269,14 @@
       // 
       // tabPage2
       // 
+      this.tabPage2.Controls.Add(this.groupBox6);
       this.tabPage2.Controls.Add(this.groupBox5);
       this.tabPage2.Controls.Add(this.groupBox4);
       this.tabPage2.Controls.Add(this.groupBox3);
       this.tabPage2.Location = new System.Drawing.Point(4, 22);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(805, 531);
+      this.tabPage2.Size = new System.Drawing.Size(805, 538);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Сalculations";
       this.tabPage2.UseVisualStyleBackColor = true;
@@ -277,9 +284,9 @@
       // groupBox5
       // 
       this.groupBox5.Controls.Add(this.listView2);
-      this.groupBox5.Location = new System.Drawing.Point(390, 300);
+      this.groupBox5.Location = new System.Drawing.Point(3, 308);
       this.groupBox5.Name = "groupBox5";
-      this.groupBox5.Size = new System.Drawing.Size(409, 225);
+      this.groupBox5.Size = new System.Drawing.Size(394, 225);
       this.groupBox5.TabIndex = 2;
       this.groupBox5.TabStop = false;
       this.groupBox5.Text = "Info";
@@ -292,7 +299,7 @@
       this.listView2.HideSelection = false;
       this.listView2.Location = new System.Drawing.Point(3, 16);
       this.listView2.Name = "listView2";
-      this.listView2.Size = new System.Drawing.Size(403, 206);
+      this.listView2.Size = new System.Drawing.Size(388, 206);
       this.listView2.TabIndex = 3;
       this.listView2.UseCompatibleStateImageBehavior = false;
       this.listView2.View = System.Windows.Forms.View.Details;
@@ -302,9 +309,9 @@
       this.groupBox4.Controls.Add(this.button5);
       this.groupBox4.Controls.Add(this.textBox5);
       this.groupBox4.Controls.Add(this.label6);
-      this.groupBox4.Location = new System.Drawing.Point(394, 7);
+      this.groupBox4.Location = new System.Drawing.Point(403, 3);
       this.groupBox4.Name = "groupBox4";
-      this.groupBox4.Size = new System.Drawing.Size(236, 100);
+      this.groupBox4.Size = new System.Drawing.Size(198, 100);
       this.groupBox4.TabIndex = 1;
       this.groupBox4.TabStop = false;
       this.groupBox4.Text = "Probability of completion";
@@ -315,8 +322,9 @@
       this.button5.Name = "button5";
       this.button5.Size = new System.Drawing.Size(100, 23);
       this.button5.TabIndex = 2;
-      this.button5.Text = "Solve";
+      this.button5.Text = "Estimate";
       this.button5.UseVisualStyleBackColor = true;
+      this.button5.Click += new System.EventHandler(this.button5_Click);
       // 
       // textBox5
       // 
@@ -337,10 +345,9 @@
       // groupBox3
       // 
       this.groupBox3.Controls.Add(this.listView1);
-      this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
       this.groupBox3.Location = new System.Drawing.Point(3, 3);
       this.groupBox3.Name = "groupBox3";
-      this.groupBox3.Size = new System.Drawing.Size(384, 525);
+      this.groupBox3.Size = new System.Drawing.Size(394, 302);
       this.groupBox3.TabIndex = 0;
       this.groupBox3.TabStop = false;
       this.groupBox3.Text = "Data";
@@ -352,16 +359,65 @@
       this.listView1.HideSelection = false;
       this.listView1.Location = new System.Drawing.Point(3, 16);
       this.listView1.Name = "listView1";
-      this.listView1.Size = new System.Drawing.Size(378, 506);
+      this.listView1.Size = new System.Drawing.Size(388, 283);
       this.listView1.TabIndex = 0;
       this.listView1.UseCompatibleStateImageBehavior = false;
       this.listView1.View = System.Windows.Forms.View.Details;
+      // 
+      // groupBox6
+      // 
+      this.groupBox6.Controls.Add(this.label8);
+      this.groupBox6.Controls.Add(this.button6);
+      this.groupBox6.Controls.Add(this.textBox6);
+      this.groupBox6.Controls.Add(this.label7);
+      this.groupBox6.Location = new System.Drawing.Point(403, 109);
+      this.groupBox6.Name = "groupBox6";
+      this.groupBox6.Size = new System.Drawing.Size(198, 100);
+      this.groupBox6.TabIndex = 3;
+      this.groupBox6.TabStop = false;
+      this.groupBox6.Text = "Estimate the maximum possible time";
+      // 
+      // button6
+      // 
+      this.button6.Location = new System.Drawing.Point(10, 64);
+      this.button6.Name = "button6";
+      this.button6.Size = new System.Drawing.Size(100, 23);
+      this.button6.TabIndex = 2;
+      this.button6.Text = "Estimate";
+      this.button6.UseVisualStyleBackColor = true;
+      this.button6.Click += new System.EventHandler(this.button6_Click);
+      // 
+      // textBox6
+      // 
+      this.textBox6.Location = new System.Drawing.Point(10, 37);
+      this.textBox6.Name = "textBox6";
+      this.textBox6.Size = new System.Drawing.Size(49, 20);
+      this.textBox6.TabIndex = 1;
+      this.textBox6.Text = "95";
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.Location = new System.Drawing.Point(7, 20);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(44, 13);
+      this.label7.TabIndex = 0;
+      this.label7.Text = "Chance";
+      // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.Location = new System.Drawing.Point(59, 40);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(15, 13);
+      this.label8.TabIndex = 3;
+      this.label8.Text = "%";
       // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(813, 557);
+      this.ClientSize = new System.Drawing.Size(813, 564);
       this.Controls.Add(this.tabControl1);
       this.Name = "Form1";
       this.ShowIcon = false;
@@ -383,6 +439,8 @@
       this.groupBox4.ResumeLayout(false);
       this.groupBox4.PerformLayout();
       this.groupBox3.ResumeLayout(false);
+      this.groupBox6.ResumeLayout(false);
+      this.groupBox6.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -417,6 +475,11 @@
     private System.Windows.Forms.Button button5;
     private System.Windows.Forms.TextBox textBox5;
     private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.GroupBox groupBox6;
+    private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.Button button6;
+    private System.Windows.Forms.TextBox textBox6;
+    private System.Windows.Forms.Label label7;
   }
 }
 

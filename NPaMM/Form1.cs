@@ -212,18 +212,48 @@ namespace NPaMM {
           _dataView.AddLines(_netCore.BildTable());
           _netCore.GetCriticalPath();
 
-          foreach (var item in _netCore.eventsPaths) {
-            var str = $@"[L={item.duration} S={item.dispersionPath}] => (";
-            item.path.ForEach((ev) => str += ev.left.number + "..");
-            str += item.path.Last().right.number + ")";
+          var bold = new ListViewItem {
+            Font = new Font("Arial", 9, FontStyle.Bold)
+          };
 
-            _infoView.AddLine(new List<string>() { str });
+          _infoView.AddLine("List of paths", bold);
+          foreach (var item in _netCore.eventsPaths) {
+            _infoView.AddLine(item.ToString());
           }
+
+          _infoView.AddLine("Critical path", (ListViewItem)bold.Clone());
           var maxCrPath = _netCore.CalcMaxDurationPath();
+          maxCrPath.ForEach((path) => _infoView.AddLine(path.ToString()));
         }
       }
+    }
 
-      //Console.WriteLine(SND.Get(0.1f));
+    private void button5_Click(object sender, EventArgs e) {
+      var term = textBox5.Text;
+
+      if (float.TryParse(term, out float z)) {
+        var chance = _netCore.EstimateProbability(z);
+
+        if (chance != null) {
+          _infoView.AddLine($@"The probability of completing all work for {term} = {chance * 100}%");
+        }
+      } else {
+        MessageBox.Show("Error parse");
+      }
+    }
+
+    private void button6_Click(object sender, EventArgs e) {
+      var chance = textBox6.Text;
+
+      if (float.TryParse(chance, out float z)) {
+        var term = _netCore.EstimateMaxPossibleTime(z);
+
+        if (term != null) {
+          _infoView.AddLine($@"The maximum time for completion of work in probability {chance}% = {term}(term)");
+        }
+      } else {
+        MessageBox.Show("Error parse");
+      }
     }
   }
 }

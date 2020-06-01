@@ -39,5 +39,12 @@ namespace NPaMM.Core {
     public float SqrDispersionPath() {
       return (float)Math.Sqrt(dispersionPath);
     }
+
+    public override string ToString() {
+      var str = $@"[L={duration} S={dispersionPath}] => (";
+      path.ForEach((ev) => str += ev.left.number + "..");
+      str += path.Last().right.number + ")";
+      return str.ToString();
+    }
   }
 }
