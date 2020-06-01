@@ -22,16 +22,18 @@ namespace NPaMM.Core {
       dispersionPath = bind.dispersion;
     }
 
-    public void AddBind(Bind bind) {
+    public EventsPath AddBind(Bind bind) {
       path.Add(bind);
       duration += bind.timeExpected;
       dispersionPath += bind.dispersion;
+      return this;
     }
 
-    public void AddPath(EventsPath path) {
+    public EventsPath AddPath(EventsPath path) {
       this.path.AddRange(path.path);
       duration += path.duration;
       dispersionPath += path.dispersionPath;
+      return this;
     }
 
     public float SqrDispersionPath() {

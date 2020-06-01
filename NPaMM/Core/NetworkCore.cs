@@ -143,23 +143,23 @@ namespace NPaMM.Core {
       eventsPaths = new List<EventsPath>();
 
       modelsConnected[0].binds.ForEach((bind) => {
-        eventsPaths.Add(new EventsPath(bind));
-        EachBinds(eventsPaths, bind.right);
+        var newPath = new EventsPath(bind);
+        EachBinds(eventsPaths, newPath, bind.right);
       });
 
       return eventsPaths;
     }
 
-    private void EachBinds(List<EventsPath> paths, Model model) {
-      var i = 0;
+    private void EachBinds(List<EventsPath> paths, EventsPath prev, Model model) {
+      if (model.binds.Count == 0) {
+        paths.Add(prev);
+        return;
+      }
+
       model.binds.ForEach((bind) => {
-        if (i == 0) {
-          paths.Last().AddBind(bind);
-        } else {
-          paths.Add(new EventsPath(bind));
-        }
-        EachBinds(paths, bind.right);
-        i += 1;
+        var newPath = new EventsPath();
+        newPath.AddPath(prev).AddBind(bind);
+        EachBinds(paths, newPath, bind.right);
       });
     }
 
