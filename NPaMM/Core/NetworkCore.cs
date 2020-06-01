@@ -114,22 +114,22 @@ namespace NPaMM.Core {
       return null;
     }
 
-    public List<string[]> BildTable() {
+    public List<List<string>> BildTable() {
       if (IsCorrectData == false) {
         return null;
       }
 
-      var table = new List<string[]>();
-      var line = new string[5];
+      var table = new List<List<string>>();
 
       usedBinds.ForEach((bind) => {
-        line.Select((item) => "");
-        line[0] = $@"({bind.left.number},{bind.right.number})";
-        line[1] = $@"{bind.timeMin}";
-        line[2] = $@"{bind.timeMax}";
-        line[3] = $@"{bind.timeExpected}";
-        line[4] = $@"{bind.dispersion}";
-        table.Add((string[])line.Clone());
+        var line = new List<string> {
+          $@"({bind.left.number},{bind.right.number})",
+          $@"{bind.timeMin}",
+          $@"{bind.timeMax}",
+          $@"{bind.timeExpected}",
+          $@"{bind.dispersion}"
+        };
+        table.Add(line);
       });
 
       return table;
@@ -168,11 +168,11 @@ namespace NPaMM.Core {
         return null;
       }
 
-      var currentMax = -float.MinValue;
+      var currentMax = float.MinValue;
       maxDurationPath = new List<EventsPath>();
 
       eventsPaths.ForEach((path) => {
-        if (currentMax > path.duration) {
+        if (currentMax < path.duration) {
           currentMax = path.duration;
           maxDurationPath.Clear();
           maxDurationPath.Add(path);

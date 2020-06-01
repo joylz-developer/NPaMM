@@ -13,7 +13,7 @@ namespace NPaMM {
     private int _lastId;
     public ListViewItem curentSelected { get; set; }
     public int curentSelectedId { get; set; }
-    private readonly bool _isFirstColumn;
+    private bool _isFirstColumn { get; set; }
 
     public delegate void ESelectionChanged(bool isSelected, ListViewItem item);
     public event ESelectionChanged OnSelectionChanged;
@@ -34,7 +34,7 @@ namespace NPaMM {
         );
       }
 
-      _columnHeaders = columnHeaders;
+      _columnHeaders = columnHeaders ?? new List<ColumnHeader>();
 
       Init();
 
@@ -42,7 +42,11 @@ namespace NPaMM {
     }
 
     public void Init() {
-      _listView.Columns.AddRange(_columnHeaders.ToArray());
+      if (_columnHeaders.Count > 0) {
+        _listView.Columns.AddRange(_columnHeaders.ToArray());
+      } else {
+        _listView.Columns.Add("Log", _listView.Width);
+      }
       _listView.FullRowSelect = true;
       _listView.ItemSelectionChanged += new ListViewItemSelectionChangedEventHandler(SelectionChanged);
     }
@@ -68,13 +72,13 @@ namespace NPaMM {
       return false;
     }
 
-    public void AddLine(params string[] s) {
-      var v = new ListViewItem();
+    public void AddLine(List<string> s, ListViewItem style = null) {
+      var v = style ?? new ListViewItem();
 
       if (_isFirstColumn) {
         v.Text = (_lastId++).ToString();
       } else {
-        v.Text = s[0];
+        v.Text = s.First();
       }
 
       for (int i = 0; i < _columnHeaders.Count(); i++) {
@@ -82,19 +86,18 @@ namespace NPaMM {
           continue;
         }
 
-        if (s.Length <= i) {
+        if (s.Count <= i) {
           v.SubItems.Add("");
         } else {
           v.SubItems.Add(s[i]);
         }
-
       }
 
       _listViewItem.Add(v);
       _listView.Items.Add(v);
     }
 
-    public void AddLines(List<string[]> lines) {
+    public void AddLines(List<List<string>> lines) {
       lines.ForEach(line => this.AddLine(line));
     }
 
@@ -111,6 +114,9 @@ namespace NPaMM {
       curentSelected = null;
       curentSelectedId = -1;
     }
-  }
 
+    public void HideHeaders(ColumnHeaderStyle style) {
+      _listView.HeaderStyle = style;
+    }
+  }
 }

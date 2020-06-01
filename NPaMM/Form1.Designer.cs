@@ -43,6 +43,12 @@
       this.textBox1 = new System.Windows.Forms.TextBox();
       this.label1 = new System.Windows.Forms.Label();
       this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.groupBox5 = new System.Windows.Forms.GroupBox();
+      this.listView2 = new System.Windows.Forms.ListView();
+      this.groupBox4 = new System.Windows.Forms.GroupBox();
+      this.button5 = new System.Windows.Forms.Button();
+      this.textBox5 = new System.Windows.Forms.TextBox();
+      this.label6 = new System.Windows.Forms.Label();
       this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.listView1 = new System.Windows.Forms.ListView();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,6 +61,8 @@
       this.groupBox2.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.tabPage2.SuspendLayout();
+      this.groupBox5.SuspendLayout();
+      this.groupBox4.SuspendLayout();
       this.groupBox3.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -63,7 +71,7 @@
       this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pictureBox1.Location = new System.Drawing.Point(0, 0);
       this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(680, 549);
+      this.pictureBox1.Size = new System.Drawing.Size(632, 525);
       this.pictureBox1.TabIndex = 0;
       this.pictureBox1.TabStop = false;
       // 
@@ -75,7 +83,7 @@
       this.tabControl1.Location = new System.Drawing.Point(0, 0);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(861, 581);
+      this.tabControl1.Size = new System.Drawing.Size(813, 557);
       this.tabControl1.TabIndex = 1;
       this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
       // 
@@ -85,7 +93,7 @@
       this.tabPage1.Location = new System.Drawing.Point(4, 22);
       this.tabPage1.Name = "tabPage1";
       this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(853, 555);
+      this.tabPage1.Size = new System.Drawing.Size(805, 531);
       this.tabPage1.TabIndex = 0;
       this.tabPage1.Text = "Network diagram";
       this.tabPage1.UseVisualStyleBackColor = true;
@@ -105,8 +113,8 @@
       // 
       this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
       this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-      this.splitContainer1.Size = new System.Drawing.Size(847, 549);
-      this.splitContainer1.SplitterDistance = 680;
+      this.splitContainer1.Size = new System.Drawing.Size(799, 525);
+      this.splitContainer1.SplitterDistance = 632;
       this.splitContainer1.TabIndex = 1;
       // 
       // groupBox2
@@ -255,14 +263,76 @@
       // 
       // tabPage2
       // 
+      this.tabPage2.Controls.Add(this.groupBox5);
+      this.tabPage2.Controls.Add(this.groupBox4);
       this.tabPage2.Controls.Add(this.groupBox3);
       this.tabPage2.Location = new System.Drawing.Point(4, 22);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(853, 555);
+      this.tabPage2.Size = new System.Drawing.Size(805, 531);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Сalculations";
       this.tabPage2.UseVisualStyleBackColor = true;
+      // 
+      // groupBox5
+      // 
+      this.groupBox5.Controls.Add(this.listView2);
+      this.groupBox5.Location = new System.Drawing.Point(390, 300);
+      this.groupBox5.Name = "groupBox5";
+      this.groupBox5.Size = new System.Drawing.Size(409, 225);
+      this.groupBox5.TabIndex = 2;
+      this.groupBox5.TabStop = false;
+      this.groupBox5.Text = "Info";
+      // 
+      // listView2
+      // 
+      this.listView2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.listView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+      this.listView2.HideSelection = false;
+      this.listView2.Location = new System.Drawing.Point(3, 16);
+      this.listView2.Name = "listView2";
+      this.listView2.Size = new System.Drawing.Size(403, 206);
+      this.listView2.TabIndex = 3;
+      this.listView2.UseCompatibleStateImageBehavior = false;
+      this.listView2.View = System.Windows.Forms.View.Details;
+      // 
+      // groupBox4
+      // 
+      this.groupBox4.Controls.Add(this.button5);
+      this.groupBox4.Controls.Add(this.textBox5);
+      this.groupBox4.Controls.Add(this.label6);
+      this.groupBox4.Location = new System.Drawing.Point(394, 7);
+      this.groupBox4.Name = "groupBox4";
+      this.groupBox4.Size = new System.Drawing.Size(236, 100);
+      this.groupBox4.TabIndex = 1;
+      this.groupBox4.TabStop = false;
+      this.groupBox4.Text = "Probability of completion";
+      // 
+      // button5
+      // 
+      this.button5.Location = new System.Drawing.Point(10, 64);
+      this.button5.Name = "button5";
+      this.button5.Size = new System.Drawing.Size(100, 23);
+      this.button5.TabIndex = 2;
+      this.button5.Text = "Solve";
+      this.button5.UseVisualStyleBackColor = true;
+      // 
+      // textBox5
+      // 
+      this.textBox5.Location = new System.Drawing.Point(10, 37);
+      this.textBox5.Name = "textBox5";
+      this.textBox5.Size = new System.Drawing.Size(100, 20);
+      this.textBox5.TabIndex = 1;
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(7, 20);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(31, 13);
+      this.label6.TabIndex = 0;
+      this.label6.Text = "Term";
       // 
       // groupBox3
       // 
@@ -270,7 +340,7 @@
       this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
       this.groupBox3.Location = new System.Drawing.Point(3, 3);
       this.groupBox3.Name = "groupBox3";
-      this.groupBox3.Size = new System.Drawing.Size(384, 549);
+      this.groupBox3.Size = new System.Drawing.Size(384, 525);
       this.groupBox3.TabIndex = 0;
       this.groupBox3.TabStop = false;
       this.groupBox3.Text = "Data";
@@ -282,7 +352,7 @@
       this.listView1.HideSelection = false;
       this.listView1.Location = new System.Drawing.Point(3, 16);
       this.listView1.Name = "listView1";
-      this.listView1.Size = new System.Drawing.Size(378, 530);
+      this.listView1.Size = new System.Drawing.Size(378, 506);
       this.listView1.TabIndex = 0;
       this.listView1.UseCompatibleStateImageBehavior = false;
       this.listView1.View = System.Windows.Forms.View.Details;
@@ -291,7 +361,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(861, 581);
+      this.ClientSize = new System.Drawing.Size(813, 557);
       this.Controls.Add(this.tabControl1);
       this.Name = "Form1";
       this.ShowIcon = false;
@@ -309,6 +379,9 @@
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
       this.tabPage2.ResumeLayout(false);
+      this.groupBox5.ResumeLayout(false);
+      this.groupBox4.ResumeLayout(false);
+      this.groupBox4.PerformLayout();
       this.groupBox3.ResumeLayout(false);
       this.ResumeLayout(false);
 
@@ -338,6 +411,12 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button4;
-    }
+    private System.Windows.Forms.GroupBox groupBox5;
+    private System.Windows.Forms.ListView listView2;
+    private System.Windows.Forms.GroupBox groupBox4;
+    private System.Windows.Forms.Button button5;
+    private System.Windows.Forms.TextBox textBox5;
+    private System.Windows.Forms.Label label6;
+  }
 }
 

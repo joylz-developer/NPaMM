@@ -14,7 +14,8 @@ namespace NPaMM {
   public partial class Form1 : Form {
     private SpaceDiagram _diagram;
     private NetworkCore _netCore;
-    private ListViewCore _listView;
+    private ListViewCore _dataView;
+    private ListViewCore _infoView;
 
     public Form1() {
       InitializeComponent();
@@ -33,9 +34,6 @@ namespace NPaMM {
 
       _diagram.OnChangedSelectedModels += CheckDiagramSelectedModels;
 
-      //_diagram.AddModel("Start");
-      //_diagram.AddModel("End");
-
       AddImportsDataDiagram(FakeImportsData());
 
       CheckDiagramSelectedModels();
@@ -48,7 +46,10 @@ namespace NPaMM {
         new ColumnHeader() { Text = "Dispersion", Width = 65 }
       };
 
-      _listView = new ListViewCore(listView1, namesColumns);
+      _dataView = new ListViewCore(listView1, namesColumns);
+
+      _infoView = new ListViewCore(listView2, null, false);
+      _infoView.HideHeaders(ColumnHeaderStyle.None);
     }
 
     private List<ImportModels> FakeImportsData() {
@@ -207,14 +208,16 @@ namespace NPaMM {
 
       if (select == 1) {
         if (_netCore.CheckCorrectDiagram()) {
-          _listView.Clear();
-          _listView.AddLines(_netCore.BildTable());
+          _dataView.Clear();
+          _dataView.AddLines(_netCore.BildTable());
           _netCore.GetCriticalPath();
+
           foreach (var item in _netCore.eventsPaths) {
-            var str = $@"{item.duration} = (";
-            item.path.ForEach((ev) => str += ev.left.number + ".");
+            var str = $@"[L={item.duration} S={item.dispersionPath}] => (";
+            item.path.ForEach((ev) => str += ev.left.number + "..");
             str += item.path.Last().right.number + ")";
-            Console.WriteLine(str);
+
+            _infoView.AddLine(new List<string>() { str });
           }
           var maxCrPath = _netCore.CalcMaxDurationPath();
         }
